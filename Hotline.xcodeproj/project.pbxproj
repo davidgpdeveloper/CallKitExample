@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96798F1825691A4F00F48E12 /* CallDirectoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96798F1725691A4F00F48E12 /* CallDirectoryHandler.swift */; };
+		96798F1C25691A4F00F48E12 /* HotlineDirectory.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 96798F1525691A4F00F48E12 /* HotlineDirectory.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		96C005932569025700BAD86F /* ProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005922569025700BAD86F /* ProviderDelegate.swift */; };
 		BB24136D1E16E45600D8285D /* CallTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24136C1E16E45600D8285D /* CallTableViewCell.swift */; };
 		BB5C8C8F1E0AE13300029D74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C8C8E1E0AE13300029D74 /* AppDelegate.swift */; };
@@ -20,6 +22,16 @@
 		BB6E171E1E19572400A2AF91 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6E171D1E19572400A2AF91 /* Audio.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		96798F1A25691A4F00F48E12 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB5C8C831E0AE13300029D74 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96798F1425691A4F00F48E12;
+			remoteInfo = HotlineDirectory;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		BB6E171B1E171C5B00A2AF91 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -27,6 +39,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				96798F1C25691A4F00F48E12 /* HotlineDirectory.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -34,6 +47,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		96798F1525691A4F00F48E12 /* HotlineDirectory.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HotlineDirectory.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		96798F1725691A4F00F48E12 /* CallDirectoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryHandler.swift; sourceTree = "<group>"; };
+		96798F1925691A4F00F48E12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96C005922569025700BAD86F /* ProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderDelegate.swift; sourceTree = "<group>"; };
 		BB24136C1E16E45600D8285D /* CallTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CallTableViewCell.swift; sourceTree = "<group>"; tabWidth = 2; };
 		BB5C8C8B1E0AE13300029D74 /* Hotline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hotline.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +66,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		96798F1225691A4F00F48E12 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BB5C8C881E0AE13300029D74 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -60,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		96798F1625691A4F00F48E12 /* HotlineDirectory */ = {
+			isa = PBXGroup;
+			children = (
+				96798F1725691A4F00F48E12 /* CallDirectoryHandler.swift */,
+				96798F1925691A4F00F48E12 /* Info.plist */,
+			);
+			path = HotlineDirectory;
+			sourceTree = "<group>";
+		};
 		BB24136B1E16E43B00D8285D /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				BB5C8C8D1E0AE13300029D74 /* Hotline */,
+				96798F1625691A4F00F48E12 /* HotlineDirectory */,
 				BB5C8C8C1E0AE13300029D74 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				BB5C8C8B1E0AE13300029D74 /* Hotline.app */,
+				96798F1525691A4F00F48E12 /* HotlineDirectory.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -154,6 +188,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		96798F1425691A4F00F48E12 /* HotlineDirectory */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96798F1D25691A4F00F48E12 /* Build configuration list for PBXNativeTarget "HotlineDirectory" */;
+			buildPhases = (
+				96798F1125691A4F00F48E12 /* Sources */,
+				96798F1225691A4F00F48E12 /* Frameworks */,
+				96798F1325691A4F00F48E12 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HotlineDirectory;
+			productName = HotlineDirectory;
+			productReference = 96798F1525691A4F00F48E12 /* HotlineDirectory.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		BB5C8C8A1E0AE13300029D74 /* Hotline */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BB5C8C9D1E0AE13300029D74 /* Build configuration list for PBXNativeTarget "Hotline" */;
@@ -166,6 +217,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				96798F1B25691A4F00F48E12 /* PBXTargetDependency */,
 			);
 			name = Hotline;
 			productName = Hotline;
@@ -178,10 +230,15 @@
 		BB5C8C831E0AE13300029D74 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Ray Wenderlich";
 				TargetAttributes = {
+					96798F1425691A4F00F48E12 = {
+						CreatedOnToolsVersion = 12.2;
+						DevelopmentTeam = DTUSCAYQM8;
+						ProvisioningStyle = Automatic;
+					};
 					BB5C8C8A1E0AE13300029D74 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = DTUSCAYQM8;
@@ -210,11 +267,19 @@
 			projectRoot = "";
 			targets = (
 				BB5C8C8A1E0AE13300029D74 /* Hotline */,
+				96798F1425691A4F00F48E12 /* HotlineDirectory */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		96798F1325691A4F00F48E12 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BB5C8C891E0AE13300029D74 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -228,6 +293,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		96798F1125691A4F00F48E12 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96798F1825691A4F00F48E12 /* CallDirectoryHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BB5C8C871E0AE13300029D74 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -244,6 +317,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		96798F1B25691A4F00F48E12 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 96798F1425691A4F00F48E12 /* HotlineDirectory */;
+			targetProxy = 96798F1A25691A4F00F48E12 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BB5C8C921E0AE13300029D74 /* Main.storyboard */ = {
@@ -265,6 +346,59 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		96798F1E25691A4F00F48E12 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DTUSCAYQM8;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = HotlineDirectory/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidgalan.Hotline.HotlineDirectory;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		96798F1F25691A4F00F48E12 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DTUSCAYQM8;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = HotlineDirectory/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.davidgalan.Hotline.HotlineDirectory;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		BB5C8C9B1E0AE13300029D74 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -418,6 +552,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		96798F1D25691A4F00F48E12 /* Build configuration list for PBXNativeTarget "HotlineDirectory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96798F1E25691A4F00F48E12 /* Debug */,
+				96798F1F25691A4F00F48E12 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BB5C8C861E0AE13300029D74 /* Build configuration list for PBXProject "Hotline" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
