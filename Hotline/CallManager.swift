@@ -30,10 +30,12 @@ import Foundation
 import CallKit
 
 class CallManager {
-  var callsChangedHandler: (() -> Void)?
   
+  var callsChangedHandler: (() -> Void)?
   private(set) var calls: [Call] = []
-
+  private let callController = CXCallController()
+  
+  
   func callWithUUID(uuid: UUID) -> Call? {
     guard let index = calls.index(where: { $0.uuid == uuid }) else {
       return nil
@@ -60,4 +62,35 @@ class CallManager {
     calls.removeAll()
     callsChangedHandler?()
   }
+  
+}
+
+
+extension CallManager {
+  
+  func end(call: Call) {
+    
+    // 1. Create an End call action. Pass in the call’s UUID to the initializer so it can be identified later.
+    let endCallAction = CXEndCallAction(call: call.uuid)
+    
+    // 2. Wrap the action into a transaction so you can send it to the system.
+    let transaction = CXTransaction(action: endCallAction)
+    
+    requestTransaction(transaction)
+  }
+  
+  // 3. Invoke request(_:completion:) from the call controller. The system will request that the provider perform this transaction, which will in turn invoke the delegate method you just implemented.
+  private func requestTransaction(_ transaction: CXTransaction) {
+    
+    callController.request(transaction) { error in
+      if let error = error {
+        print("Error requesting transaction: \(error)")
+      } else {
+        print("Requested transaction successfully")
+      }
+    }
+    
+  }
+
+  
 }
