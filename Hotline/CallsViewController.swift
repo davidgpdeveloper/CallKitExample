@@ -47,22 +47,43 @@ class CallsViewController: UITableViewController {
   }
   
   @IBAction private func unwindForNewCall(_ segue: UIStoryboardSegue) {
+
+    // 1. Extracts the properties of the call from NewCallViewController, which is the source of this unwind segue.
+    guard
+      let newCallController = segue.source as? NewCallViewController,
+      let handle = newCallController.handle
+      else {
+        return
+    }
+      
+    let videoEnabled = newCallController.videoEnabled
+        
+    // 2. The user can suspend the app before the action completes, so it should use a background task.
+    let backgroundTaskIdentifier =
+      UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+      AppDelegate.shared.displayIncomingCall(
+        uuid: UUID(),
+        handle: handle,
+        hasVideo: videoEnabled
+      ) { _ in
+        UIApplication.shared.endBackgroundTask(backgroundTaskIdentifier)
+      }
+    }
+
+    
   }
 }
 
 // MARK: - UITableViewDataSource
 extension CallsViewController {
-  override func tableView(
-    _ tableView: UITableView,
-    numberOfRowsInSection section: Int
-  ) -> Int {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return callManager.calls.count
   }
   
-  override func tableView(
-    _ tableView: UITableView,
-    cellForRowAt indexPath: IndexPath
-  ) -> UITableViewCell {
+  override func tableView( _ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
     let call = callManager.calls[indexPath.row]
     
     let cell = tableView.dequeueReusableCell(withIdentifier: callCellIdentifier) as! CallTableViewCell
@@ -76,10 +97,9 @@ extension CallsViewController {
 
 // MARK - UITableViewDelegate
 extension CallsViewController {
-  override func tableView(
-    _ tableView: UITableView,
-    titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath
-  ) -> String? {
+  
+  override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
     return "End"
   }
+  
 }

@@ -41,9 +41,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    
+    providerDelegate = ProviderDelegate(callManager: callManager)
+    
     return true
   }
   
 }
 
+extension AppDelegate {
+  
+  func displayIncomingCall(
+    uuid: UUID,
+    handle: String,
+    hasVideo: Bool = false,
+    completion: ((Error?) -> Void)?
+  ) {
+    providerDelegate.reportIncomingCall(
+      uuid: uuid,
+      handle: handle,
+      hasVideo: hasVideo,
+      completion: completion)
+  }
+
+  
+}
 
