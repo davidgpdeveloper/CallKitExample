@@ -91,7 +91,7 @@ extension CallManager {
     }
     
   }
-
+  
   func setHeld(call: Call, onHold: Bool) {
     
     let setHeldCallAction = CXSetHeldCallAction(call: call.uuid, onHold: onHold)
@@ -100,6 +100,21 @@ extension CallManager {
     
     requestTransaction(transaction)
   }
-
+  
+  func startCall(handle: String, videoEnabled: Bool) {
+    
+    // 1 A handle, represented by CXHandle, can specify the handle type and its value. Hotline supports phone number handles, so you’ll use it here as well.
+    let handle = CXHandle(type: .phoneNumber, value: handle)
+    
+    // 2 A CXStartCallAction receives a unique UUID and a handle as input.
+    let startCallAction = CXStartCallAction(call: UUID(), handle: handle)
+    
+    // 3 Specify whether the call is audio-only or a video call by setting the isVideo property of the action.
+    startCallAction.isVideo = videoEnabled
+    let transaction = CXTransaction(action: startCallAction)
+    
+    requestTransaction(transaction)
+  }
+  
   
 }

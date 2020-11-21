@@ -94,82 +94,124 @@ extension ProviderDelegate {
 // MARK: - CXProviderDelegate
 extension ProviderDelegate: CXProviderDelegate {
     
-  func providerDidReset(_ provider: CXProvider) {
-    stopAudio()
-    
-    for call in callManager.calls {
-      call.end()
+    func providerDidReset(_ provider: CXProvider) {
+        stopAudio()
+        
+        for call in callManager.calls {
+            call.end()
+        }
+        
+        callManager.removeAllCalls()
     }
-    
-    callManager.removeAllCalls()
-  }
     
     func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
-      // 1. A reference comes from the call manager, corresponding to the UUID of the call to answer.
-      guard let call = callManager.callWithUUID(uuid: action.callUUID) else {
-        action.fail()
-        return
-      }
-      
-      // 2. The app configures the audio session for the call. The system activates the session at an elevated priority.
-      configureAudioSession()
+        // 1. A reference comes from the call manager, corresponding to the UUID of the call to answer.
+        guard let call = callManager.callWithUUID(uuid: action.callUUID) else {
+            action.fail()
+            return
+        }
         
-      // 3. answer() indicates that the call is now active.
-      call.answer()
+        // 2. The app configures the audio session for the call. The system activates the session at an elevated priority.
+        configureAudioSession()
         
-      // 4. When processing an action, it’s important to either fail or fulfill it. Assuming no errors during the process, you can call fulfill() to indicate success.
-      action.fulfill()
-    }
-
-    // 5. Once the system activates the provider’s audio session, the delegate is notified. This is your chance to begin processing the call’s audio.
-    func provider(_ provider: CXProvider, didActivate audioSession: AVAudioSession) {
-      startAudio()
+        // 3. answer() indicates that the call is now active.
+        call.answer()
+        
+        // 4. When processing an action, it’s important to either fail or fulfill it. Assuming no errors during the process, you can call fulfill() to indicate success.
+        action.fulfill()
     }
     
+    // 5. Once the system activates the provider’s audio session, the delegate is notified. This is your chance to begin processing the call’s audio.
+    func provider(_ provider: CXProvider, didActivate audioSession: AVAudioSession) {
+        startAudio()
+    }
     
     
     func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
         
-      // 1. Start by getting a reference to the call from the call manager.
-      guard let call = callManager.callWithUUID(uuid: action.callUUID) else {
-        action.fail()
-        return
-      }
-      
-      // 2. As the call is about to end, it’s time to stop processing the call’s audio.
-      stopAudio()
+        // 1. Start by getting a reference to the call from the call manager.
+        guard let call = callManager.callWithUUID(uuid: action.callUUID) else {
+            action.fail()
+            return
+        }
         
-      // 3. Invoking end() changes the status of the call, allowing other classes to react to the new state.
-      call.end()
+        // 2. As the call is about to end, it’s time to stop processing the call’s audio.
+        stopAudio()
         
-      // 4. At this point, you’ll mark the action as fulfilled.
-      action.fulfill()
+        // 3. Invoking end() changes the status of the call, allowing other classes to react to the new state.
+        call.end()
         
-      // 5. Since you no longer need the call, the call manager can dispose of it.
-      callManager.remove(call: call)
+        // 4. At this point, you’ll mark the action as fulfilled.
+        action.fulfill()
+        
+        // 5. Since you no longer need the call, the call manager can dispose of it.
+        callManager.remove(call: call)
         
     }
-
+    
     
     func provider(_ provider: CXProvider, perform action: CXSetHeldCallAction) {
-      guard let call = callManager.callWithUUID(uuid: action.callUUID) else {
-        action.fail()
-        return
-      }
-      
-      // 1.  After getting the reference to the call, update its status according to the isOnHold property of the action.
-      call.state = action.isOnHold ? .held : .active
-      
-      // 2. Depending on the status, start or stop processing the call’s audio.
-      if call.state == .held {
-        stopAudio()
-      } else {
-        startAudio()
-      }
-      
-      // 3. Mark the action fulfilled.
-      action.fulfill()
+        guard let call = callManager.callWithUUID(uuid: action.callUUID) else {
+            action.fail()
+            return
+        }
+        
+        // 1.  After getting the reference to the call, update its status according to the isOnHold property of the action.
+        call.state = action.isOnHold ? .held : .active
+        
+        // 2. Depending on the status, start or stop processing the call’s audio.
+        if call.state == .held {
+            stopAudio()
+        } else {
+            startAudio()
+        }
+        
+        // 3. Mark the action fulfilled.
+        action.fulfill()
     }
+    
+    func provider(_ provider: CXProvider, perform action: CXStartCallAction) {
+        
+        let call = Call(uuid: action.callUUID, outgoing: true, handle: action.handle.value)
+        
+        // 1. After creating a Call with the call’s UUID from the call manager, you’ll have to configure the app’s audio session. Just as with incoming calls, your responsibility at this point is only configuration. The actual processing will start later, when provider(_:didActivate) is invoked.
+
+        configureAudioSession()
+        
+        // 2. The delegate monitors the call’s lifecycle. It’ll initially report that the outgoing call has started connecting. When the call is connected, the provider delegate will report that as well.
+        call.connectedStateChanged = { [weak self, weak call] in
+            guard
+                let self = self,
+                let call = call
+            else {
+                return
+            }
+            
+            if call.connectedState == .pending {
+                self.provider.reportOutgoingCall(with: call.uuid, startedConnectingAt: nil)
+            } else if call.connectedState == .complete {
+                self.provider.reportOutgoingCall(with: call.uuid, connectedAt: nil)
+            }
+        }
+        
+        // 3. Calling start() on the call triggers its lifecycle changes. Upon a successful connection, the call can be marked as fulfilled.
+        call.start { [weak self, weak call] success in
+            guard
+                let self = self,
+                let call = call
+            else {
+                return
+            }
+            
+            if success {
+                action.fulfill()
+                self.callManager.add(call: call)
+            } else {
+                action.fail()
+            }
+        }
+    }
+    
     
 }
 
