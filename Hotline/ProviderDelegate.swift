@@ -126,6 +126,42 @@ extension ProviderDelegate: CXProviderDelegate {
       startAudio()
     }
     
+    
+    
+    func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
+        
+      // 1. Start by getting a reference to the call from the call manager.
+      guard let call = callManager.callWithUUID(uuid: action.callUUID) else {
+        action.fail()
+        return
+      }
+      
+      // 2. As the call is about to end, it’s time to stop processing the call’s audio.
+      stopAudio()
+        
+      // 3. Invoking end() changes the status of the call, allowing other classes to react to the new state.
+      call.end()
+        
+      // 4. At this point, you’ll mark the action as fulfilled.
+      action.fulfill()
+        
+      // 5. Since you no longer need the call, the call manager can dispose of it.
+      callManager.remove(call: call)
+        
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
 }
 
 
