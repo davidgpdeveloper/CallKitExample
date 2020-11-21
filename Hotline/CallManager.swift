@@ -92,5 +92,14 @@ extension CallManager {
     
   }
 
+  func setHeld(call: Call, onHold: Bool) {
+    
+    let setHeldCallAction = CXSetHeldCallAction(call: call.uuid, onHold: onHold)
+    let transaction = CXTransaction()
+    transaction.addAction(setHeldCallAction)
+    
+    requestTransaction(transaction)
+  }
+
   
 }

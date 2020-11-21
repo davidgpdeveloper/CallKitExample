@@ -110,4 +110,14 @@ extension CallsViewController {
     return "End"
   }
   
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    let call = callManager.calls[indexPath.row]
+    call.state = call.state == .held ? .active : .held
+    callManager.setHeld(call: call, onHold: call.state == .held)
+    
+    tableView.reloadData()
+  }
+
+  
 }
