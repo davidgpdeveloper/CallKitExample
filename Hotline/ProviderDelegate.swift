@@ -103,6 +103,29 @@ extension ProviderDelegate: CXProviderDelegate {
     
     callManager.removeAllCalls()
   }
+    
+    func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
+      // 1. A reference comes from the call manager, corresponding to the UUID of the call to answer.
+      guard let call = callManager.callWithUUID(uuid: action.callUUID) else {
+        action.fail()
+        return
+      }
+      
+      // 2. The app configures the audio session for the call. The system activates the session at an elevated priority.
+      configureAudioSession()
+        
+      // 3. answer() indicates that the call is now active.
+      call.answer()
+        
+      // 4. When processing an action, it’s important to either fail or fulfill it. Assuming no errors during the process, you can call fulfill() to indicate success.
+      action.fulfill()
+    }
+
+    // 5. Once the system activates the provider’s audio session, the delegate is notified. This is your chance to begin processing the call’s audio.
+    func provider(_ provider: CXProvider, didActivate audioSession: AVAudioSession) {
+      startAudio()
+    }
+    
 }
 
 
