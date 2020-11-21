@@ -78,6 +78,7 @@ class CallsViewController: UITableViewController {
 
 // MARK: - UITableViewDataSource
 extension CallsViewController {
+  
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return callManager.calls.count
   }
@@ -93,6 +94,13 @@ extension CallsViewController {
     
     return cell
   }
+  
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    
+    let call = callManager.calls[indexPath.row]
+    callManager.end(call: call)
+  }
+  
 }
 
 // MARK - UITableViewDelegate
