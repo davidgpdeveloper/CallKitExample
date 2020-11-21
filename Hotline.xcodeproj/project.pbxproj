@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96C005932569025700BAD86F /* ProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005922569025700BAD86F /* ProviderDelegate.swift */; };
 		BB24136D1E16E45600D8285D /* CallTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24136C1E16E45600D8285D /* CallTableViewCell.swift */; };
 		BB5C8C8F1E0AE13300029D74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C8C8E1E0AE13300029D74 /* AppDelegate.swift */; };
 		BB5C8C941E0AE13300029D74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB5C8C921E0AE13300029D74 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		96C005922569025700BAD86F /* ProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderDelegate.swift; sourceTree = "<group>"; };
 		BB24136C1E16E45600D8285D /* CallTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CallTableViewCell.swift; sourceTree = "<group>"; tabWidth = 2; };
 		BB5C8C8B1E0AE13300029D74 /* Hotline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hotline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5C8C8E1E0AE13300029D74 /* AppDelegate.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				BB5C8C8E1E0AE13300029D74 /* AppDelegate.swift */,
+				96C005922569025700BAD86F /* ProviderDelegate.swift */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				BB5C8CA71E0AF37000029D74 /* NewCallViewController.swift in Sources */,
 				BB6E171E1E19572400A2AF91 /* Audio.swift in Sources */,
 				BB5C8C8F1E0AE13300029D74 /* AppDelegate.swift in Sources */,
+				96C005932569025700BAD86F /* ProviderDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
